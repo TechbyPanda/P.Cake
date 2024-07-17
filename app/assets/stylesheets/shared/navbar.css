@@ -1,5 +1,59 @@
 nav{
     width: 100%;
-    padding: 10px;
-    background-color: red;
+    background-color: #fff;
+    color: #7a7a7a;
+    position: relative;
+}
+
+.wave-separator{
+    height: 9px;
+    width: 100%;
+    background-color: transparent;
+    background: url(wave.png) repeat-x bottom;
+    position: absolute;
+    bottom: -9px;
+    z-index: 25;
+}
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+nav .container .navigation{
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav .container .navigation .menu .menu-item{
+    display: inline-block;
+}
+
+nav .container .navigation .menu .menu-item a{
+    padding: 15px 18px 14px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5e3c3e;
+}
+
+nav .container .navigation .menu .menu-item a:hover{
+    color: #e47277;
 }

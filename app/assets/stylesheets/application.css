@@ -13,9 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
 
  *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Roboto";
+    transition: all .2s ease-in-out;
  }

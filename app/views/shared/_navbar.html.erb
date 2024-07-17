@@ -1,1 +1,19 @@
-<nav></nav>
+<nav>
+    <div class="container">
+        <div class="navigation">
+            <h1 class="logo">P. Cake</h1>
+            <div class="menu">
+                <% NAV_ITEMS.each do |value| %>
+                    <div class="menu-item">
+                    <% begin %>
+                        <%= link_to value.capitalize, send("#{value}_path") %>
+                    <% rescue NoMethodError %>
+                        <%= link_to value.capitalize, "/" %> <!-- Fallback to root path or another default URL -->
+                    <% end %>
+                    </div>
+                <% end %>     
+            </div>
+        </div>
+    </div>
+    <div class="wave-separator"></div>
+</nav>
