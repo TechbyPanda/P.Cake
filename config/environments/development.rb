@@ -73,10 +73,11 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  # Allow requests from our preview domain.
+  # Allow requests from our preview domain
   pf_host = "#{ENV['CODESPACE_NAME']}-3000.#{pf_domain}"
   config.hosts << pf_host
   config.hosts << "localhost:3000"
-
+  puts pf_host
   config.action_cable.allowed_request_origins = ["https://#{pf_host}", "http://localhost:3000"]
+  config.action_controller.forgery_protection_origin_check = false
 end
