@@ -15,7 +15,7 @@
                 <% if logged_in? %>
                     <div class="menu-item"> <%= link_to "Signout", signout_path, data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %></div>
                     <div class="menu-item">
-                        <%= link_to "", class: 'cart-link' do %>
+                        <%= link_to cart_path, class: 'cart-link' do %>
                             <%= image_tag('cart.png', alt: 'Shopping Cart') %>
                         <% end %>
                     </div>

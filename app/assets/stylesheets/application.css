@@ -46,6 +46,18 @@
   margin-top: 1.5rem;
 }
 
+.mt-4{
+  margin-top: 2rem;
+}
+
+.mt-5{
+  margin-top: 2.5rem;
+}
+
+.mt-6{
+  margin-top: 3rem;
+}
+
 .btn-primary{
   border: 2px solid #E47277;
   color: #E47277;
