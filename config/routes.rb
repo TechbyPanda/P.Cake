@@ -15,4 +15,11 @@ Rails.application.routes.draw do
 
   #Cart
   get 'cart', to: 'carts#index'
+
+  #Line Items
+  # config/routes.rb
+  resources :line_items do
+    patch 'increment', on: :member
+    patch 'decrement', on: :member
+  end
 end
