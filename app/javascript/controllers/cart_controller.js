@@ -3,14 +3,16 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['id', 'quantity']
 
+  headers = {
+    "Content-Type": "application/json",
+    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  }
+
   increment() {
     const lineItemId = this.getId();
     fetch(`/line_items/${lineItemId}/increment`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
+      headers: this.headers
     })
     .then(response => response.json())
     .then(data => {
@@ -28,10 +30,7 @@ export default class extends Controller {
     const lineItemId = this.getId();
     fetch(`/line_items/${lineItemId}/decrement`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
+      headers: this.headers
     })
     .then(response => response.json())
     .then(data => {
