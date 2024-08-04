@@ -7,7 +7,6 @@
             <th>Name</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th></th>
             </tr>
         </thead>
         <tbody data-controller="cart">
@@ -15,7 +14,7 @@
             <tr data-cart-target="id" id="<%=line_item.id%>">
                 <td><%= image_tag(line_item.product.image, alt: line_item.product.name, class: 'product-image') %></td>
                 <td><%= line_item.product.name %></td>
-                <td><%= number_to_currency(line_item.product.price) %></td>
+                <td data-cart-target="price" price="<%= line_item.product.price %>"><%= number_to_currency(line_item.product.price * line_item.quantity, unit: "₹", format: "%u %n") %></td>
                 <td>
                     <span class="quantity-buttons">
                         <%= button_tag type: 'button', class: 'quantity-increment', data: {action: "click->cart#increment"}  do %>
@@ -26,11 +25,6 @@
                             <i class="fa fa-minus" aria-hidden="true"></i>
                         <% end %>
                     </span>
-                </td>
-                <td>
-                    <%= link_to root_path, class: "remove-action", data:{turbo_method: :get, turbo_confirm: "Are you sure?"}  do %>
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    <% end %>
                 </td>
             </tr>
             <% end %>

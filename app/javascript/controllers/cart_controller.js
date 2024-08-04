@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['id', 'quantity']
+  static targets = ['id', 'quantity', 'price']
 
   headers = {
     "Content-Type": "application/json",
@@ -19,6 +19,8 @@ export default class extends Controller {
       if (data.success) {
         const quantity = parseInt(this.quantityTarget.textContent) + 1;
         this.quantityTarget.textContent = quantity;
+        console.log(this.getPrice())
+        this.setPrice(this.getPrice() * quantity)
       } else {
         console.error(data.message);
       }
@@ -37,6 +39,7 @@ export default class extends Controller {
       if (data.success) {
         const quantity = parseInt(this.quantityTarget.textContent) - 1;
         this.quantityTarget.textContent = quantity;
+        this.setPrice(this.getPrice() * quantity)
       } else {
         console.error(data.message);
       }
@@ -44,7 +47,26 @@ export default class extends Controller {
     .catch(error => console.error("Error:", error));
   }
 
+  setPrice(price) {
+    this.priceTarget.textContent = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR'
+    }).format(price);
+  }  
+
+  getPrice(){
+    // return extractIntegerFromPrice(this.priceTarget.textContent)
+    const price = this.priceTarget.getAttribute('price')
+    return parseInt(price)
+  }
+
   getId() {
     return this.idTarget.id;
   }
 }
+
+function extractIntegerFromPrice(priceString) {
+    const cleanedPrice = priceString.replace(/[₹,]/g, '').split('.')[0];
+    return parseInt(cleanedPrice);
+}
+  
