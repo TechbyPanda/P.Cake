@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   def home
-    @products = Product.all
+    if logged_in?
+      @products = Product.all
+    else
+      @products = Product.all
+    end
   end
 
   def about
