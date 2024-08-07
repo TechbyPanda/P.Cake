@@ -3,24 +3,27 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['id', 'quantity', 'price']
 
+  currentId = ''
+
   headers = {
     "Content-Type": "application/json",
     "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
   }
 
-  increment() {
-    const lineItemId = this.getId();
-    fetch(`/line_items/${lineItemId}/increment`, {
+  increment(event) {
+    this.currentId = event.currentTarget.dataset.id
+
+    fetch(`/line_items/${this.currentId}/increment`, {
       method: "PATCH",
       headers: this.headers
     })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        const quantity = parseInt(this.quantityTarget.textContent) + 1;
-        this.quantityTarget.textContent = quantity;
-        console.log(this.getPrice())
-        this.setPrice(this.getPrice() * quantity)
+        // const quantity = parseInt(this.quantityTarget.textContent) + 1;
+        // this.quantityTarget.textContent = quantity;
+        // console.log(this.getPrice())
+        // this.setPrice(this.getPrice() * quantity)
       } else {
         console.error(data.message);
       }
@@ -28,18 +31,18 @@ export default class extends Controller {
     .catch(error => console.error("Error:", error));
   }
 
-  decrement() {
-    const lineItemId = this.getId();
-    fetch(`/line_items/${lineItemId}/decrement`, {
+  decrement(event) {
+    this.currentId = event.currentTarget.dataset.id
+    fetch(`/line_items/${this.currentId}/decrement`, {
       method: "PATCH",
       headers: this.headers
     })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        const quantity = parseInt(this.quantityTarget.textContent) - 1;
-        this.quantityTarget.textContent = quantity;
-        this.setPrice(this.getPrice() * quantity)
+        // const quantity = parseInt(this.quantityTarget.textContent) - 1;
+        // this.quantityTarget.textContent = quantity;
+        // this.setPrice(this.getPrice() * quantity)
       } else {
         console.error(data.message);
       }
@@ -55,13 +58,19 @@ export default class extends Controller {
   }  
 
   getPrice(){
-    // return extractIntegerFromPrice(this.priceTarget.textContent)
     const price = this.priceTarget.getAttribute('price')
     return parseInt(price)
   }
 
+  getRow(event){
+    return event.currentTarget.closest(`[id="id-${this.currentId}"]`)
+  }
+
   getId() {
-    return this.idTarget.id;
+    console.log(this.idTarget)
+    let currentTarget = `id-${this.currentId}Target`
+    console.log(this[currentTarget])
+    return this[currentTarget]
   }
 }
 

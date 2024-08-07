@@ -17,17 +17,17 @@
           </thead>
           <tbody data-controller="cart">
               <% @cart.line_items.each do |line_item| %>
-              <tr data-cart-target="id" id="<%=line_item.id%>">
+              <tr id="id-<%= line_item.id %>">
                   <td><%= image_tag(line_item.product.image, alt: line_item.product.name, class: 'product-image') %></td>
                   <td><%= line_item.product.name %></td>
-                  <td data-cart-target="price" price="<%= line_item.product.price %>"><%= number_to_currency(line_item.product.price * line_item.quantity, unit: "₹", format: "%u %n") %></td>
+                  <td price="<%= line_item.product.price %>"><%= number_to_currency(line_item.product.price * line_item.quantity, unit: "₹", format: "%u %n") %></td>
                   <td>
                       <span class="quantity-buttons">
-                          <%= button_tag type: 'button', class: 'quantity-increment', data: {action: "click->cart#increment"}  do %>
+                          <%= button_tag type: 'button', class: 'quantity-increment', data: {action: "click->cart#increment", id: line_item.id }  do %>
                               <i class="fa fa-plus" aria-hidden="true"></i>
                           <% end %>
-                          <span data-cart-target="quantity"><%= line_item.quantity %></span>
-                          <%= button_tag type: 'button', class: 'quantity-decrement', data: {action: "click->cart#decrement"} do %>
+                          <span qty="qty-<%= line_item.id%>"><%= line_item.quantity %></span>
+                          <%= button_tag type: 'button', class: 'quantity-decrement', data: {action: "click->cart#decrement", id: line_item.id } do %>
                               <i class="fa fa-minus" aria-hidden="true"></i>
                           <% end %>
                       </span>
