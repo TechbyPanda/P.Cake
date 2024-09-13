@@ -22,4 +22,8 @@ Rails.application.routes.draw do
     patch 'increment', on: :member
     patch 'decrement', on: :member
   end
+
+  resources :products, only: [:index, :show] do
+    post 'add_to_cart', on: :member
+  end
 end

@@ -1,0 +1,6 @@
+<!-- app/views/shared/_notification.html.erb -->
+<% if flash[:notice] || flash[:alert] || flash[:error] || flash[:success] %>
+  <div id="notification" class="notification <%= flash[:notice] ? 'notice' : flash[:alert] ? 'alert' : flash[:success] ? 'success' : 'error' %>">
+    <p><%= flash[:notice] || flash[:alert] || flash[:error] || flash[:success] %></p>
+  </div>
+<% end %>
