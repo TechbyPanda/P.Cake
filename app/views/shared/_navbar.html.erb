@@ -16,6 +16,7 @@
                     <div class="menu-item"> <%= link_to "Signout", signout_path, data:{turbo_method: :delete, turbo_confirm: "Are you sure?"} %></div>
                     <div class="menu-item">
                         <%= link_to cart_path, class: 'cart-link' do %>
+                            <span><%= current_user.cart.line_items.count %></span>
                             <%= image_tag('cart.png', alt: 'Shopping Cart') %>
                         <% end %>
                     </div>

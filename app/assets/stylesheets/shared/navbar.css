@@ -57,3 +57,26 @@ nav .container .navigation .menu .menu-item a{
 nav .container .navigation .menu .menu-item a:hover{
     color: #e47277;
 }
+
+.cart-link{
+    position: relative;
+}
+
+.cart-link span {
+    position: absolute;
+    top: 4px;
+    right: 20px;
+    background-color: #e47277;
+    color: #fff;
+    padding: 0.3rem 0.6rem; /* Adjusted padding to better fit two-digit numbers */
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.75rem; /* Adjust font size for better fit */
+    line-height: 1; /* Ensure text is vertically centered */
+    min-width: 1.5rem; /* Minimum width to handle single-digit numbers */
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(50%, -50%);
+}
